@@ -1,0 +1,7 @@
+atomicwrites==1.2.1
+attrs==18.2.0
+more-itertools==5.0.0
+numpy==1.16.0
+pluggy==0.8.1
+py==1.7.0
+six==1.12.0
