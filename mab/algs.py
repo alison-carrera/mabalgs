@@ -15,8 +15,8 @@ class UCB1:
         ucb_values = np.zeros(self.n_arms).astype(np.float)
         total_counts = np.sum(self.number_of_selections)
        
-        bonus = np.sqrt((2 * np.log(total_counts)) / self.number_of_selections)
-        ucb_values = self.average_reward + bonus
+        exploration = np.sqrt(2 * np.log(total_counts) / self.number_of_selections)
+        ucb_values = self.average_reward + exploration
         return np.argmax(ucb_values)
   
     def update(self, chosen_arm, reward):
