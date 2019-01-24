@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='mabalgs',
-      version='0.2',
+      version='0.3',
       description='Multi-armed bandit algorithms',
       url='https://github.com/alison-carrera/mabalgs',
       author='Alison Carrera',
