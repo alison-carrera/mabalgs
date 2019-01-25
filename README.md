@@ -32,6 +32,51 @@ ucb_with_two_arms = algs.UCB1(2)
 my_arm = ucb_with_two_arms.select()
 ucb_with_two_arms.reward(my_arm)
 ```
+
+### UCB-Tuned (Upper Confidence Bound Tuned)
+A strict improvement over both UCB solutions can be made by tuning the upper-bound parameter in UCB1’s decision rule. UCB-Tuned empirically outperforms UCB1 and UCB2 in terms of frequency
+of picking the best arm. Further, indicate that UCB-Tuned is “not very” sensitive to the variance of the arms. 
+
+#### Get a selected arm
+```python
+from mab import algs
+
+ucbt_with_two_arms = algs.UCBTuned(2)
+ucbt_with_two_arms.select()
+```
+
+#### Reward an arm
+```python
+from mab import algs
+
+ucbt_with_two_arms = algs.UCBTuned(2)
+my_arm = ucbt_with_two_arms.select()
+ucbt_with_two_arms.reward(my_arm)
+```
+
+### Thompson Sampling
+Thompson Sampling is fully Bayesian: it generates a bandit configuration (i.e. a vector of expected rewards) from a posterior distribution, and then acts as if this was the true configuration (i.e. it pulls the lever with the highest expected reward).
+
+“On the likelihood that one unknown probability exceeds another
+in view of the evidence of two samples” produced the first paper on an equivalent problem to the multi-armed bandit in which a solution to the Bernoulli
+distribution bandit problem now referred to as Thompson sampling is presented.
+
+#### Get a selected arm
+```python
+from mab import algs
+
+thomp_with_two_arms = algs.ThompsomSampling(2)
+thomp_with_two_arms.select()
+```
+
+#### Reward an arm
+```python
+from mab import algs
+
+thomp_with_two_arms = algs.ThompsomSampling(2)
+my_arm = thomp_with_two_arms.select()
+thomp_with_two_arms.reward(my_arm)
+```
 ----------------
 
 ## References
@@ -39,3 +84,4 @@ ucb_with_two_arms.reward(my_arm)
 - [A Survey of Online Experiment Design
 with the Stochastic Multi-Armed Bandit](https://arxiv.org/pdf/1510.00757.pdf)
 - [Finite-time Analysis of the Multiarmed Bandit Problem](https://link.springer.com/article/10.1023%2FA%3A1013689704352?LI=true)
+- [Solving multiarmed bandits: A comparison of epsilon-greedy and Thompson sampling](https://towardsdatascience.com/solving-multiarmed-bandits-a-comparison-of-epsilon-greedy-and-thompson-sampling-d97167ca9a50)
