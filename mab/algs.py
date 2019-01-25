@@ -55,17 +55,14 @@ class ThompsomSampling:
     def __init__(self, n_arms):
         self.number_reward_0 = np.zeros(n_arms).astype(np.float)
         self.number_reward_1 = np.zeros(n_arms).astype(np.float)
-        self.n_arms = n_arms
 
     def select(self):
-        theta = self.number_reward_1 + 1, self.number_reward_0 + 1
-        theta_value = np.random.beta(theta)
-
-        chosen_arm = np.argmax(theta_value)
-
-        self.number_reward_0[chosen_arm] += 1
-
+        theta_value = np.random.beta(self.number_reward_1 + 1, self.number_reward_0 + 1)        
+        chosen_arm = np.argmax(theta_value)        
         return chosen_arm
-
+  
     def reward(self, chosen_arm):
         self.number_reward_1[chosen_arm] += 1
+        
+    def penalty(self, chosen_arm):
+        self.number_reward_0[chosen_arm] += 1

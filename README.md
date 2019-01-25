@@ -20,6 +20,7 @@ Is an algorithm for the multi-armed bandit that achieves regret that grows only 
 ```python
 from mab import algs
 
+#Constructor receives number of arms.
 ucb_with_two_arms = algs.UCB1(2)
 ucb_with_two_arms.select()
 ```
@@ -28,6 +29,7 @@ ucb_with_two_arms.select()
 ```python
 from mab import algs
 
+#Constructor receives number of arms.
 ucb_with_two_arms = algs.UCB1(2)
 my_arm = ucb_with_two_arms.select()
 ucb_with_two_arms.reward(my_arm)
@@ -41,6 +43,7 @@ of picking the best arm. Further, indicate that UCB-Tuned is “not very” sens
 ```python
 from mab import algs
 
+#Constructor receives number of arms.
 ucbt_with_two_arms = algs.UCBTuned(2)
 ucbt_with_two_arms.select()
 ```
@@ -49,6 +52,7 @@ ucbt_with_two_arms.select()
 ```python
 from mab import algs
 
+#Constructor receives number of arms.
 ucbt_with_two_arms = algs.UCBTuned(2)
 my_arm = ucbt_with_two_arms.select()
 ucbt_with_two_arms.reward(my_arm)
@@ -65,6 +69,7 @@ distribution bandit problem now referred to as Thompson sampling is presented.
 ```python
 from mab import algs
 
+#Constructor receives number of arms.
 thomp_with_two_arms = algs.ThompsomSampling(2)
 thomp_with_two_arms.select()
 ```
@@ -73,9 +78,13 @@ thomp_with_two_arms.select()
 ```python
 from mab import algs
 
+#Constructor receives number of arms.
 thomp_with_two_arms = algs.ThompsomSampling(2)
 my_arm = thomp_with_two_arms.select()
 thomp_with_two_arms.reward(my_arm)
+
+#Thompsom Sampling has a penalty function. It could be used in a onDestroy() event from a banner, for example. The arm was selected, showed to the user, but no interation was realized until the end of the arm cycle.
+thomp_with_two_arms.penalty(my_arm)
 ```
 ----------------
 
