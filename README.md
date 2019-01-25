@@ -83,7 +83,9 @@ thomp_with_two_arms = algs.ThompsomSampling(2)
 my_arm = thomp_with_two_arms.select()
 thomp_with_two_arms.reward(my_arm)
 
-#Thompsom Sampling has a penalty function. It could be used in a onDestroy() event from a banner, for example. The arm was selected, showed to the user, but no interation was realized until the end of the arm cycle.
+#Thompsom Sampling has a penalty function. 
+# It could be used in a onDestroy() event from a banner, for example. 
+# The arm was selected, showed to the user, but no interation was realized until the end of the arm cycle.
 thomp_with_two_arms.penalty(my_arm)
 ```
 ----------------
