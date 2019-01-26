@@ -88,19 +88,20 @@ thomp_with_two_arms.reward(my_arm)
 
 ```python
 # Thompsom Sampling has a penalty function. 
-# It should be used in a onDestroy() event from a banner, for example. 
-# The arm was selected, showed to the user, but no interation was realized until the end of the arm cycle.
+# It should be used in onDestroy() event of a banner, for example. 
+# The arm was selected, showed to the user, but no reward was realized until the end of the arm cycle.
 thomp_with_two_arms.penalty(my_arm)
 ```
 
 ## Comparison of the algorithms using Monte Carlo Simulation
 
-Monte Carlo simulation is a program for debugging / testing MAB algorithms. This evaluation was done in real time
-with the aid of an execution attempt over time.
+Monte Carlo simulation is the best way to debug / test MAB algorithms. This simulation generates data in real time 
+respecting a probability of delivery (chosen by the executor of the simulation) over time. 
+These probabilities may represent the taste of most users regarding a MAB arm (option) over time, for example.
 
 Example: We want to test a 5-arm MAB that will be used in an ad problem, and MAB must choose which of the 5 ads must
-receive the most clicks from users. You can use the following probability setting ([0.9, 0.1, 0.1, 0.1, 0.1]).
-The definition of each array element represents an arm and its probability of being clicked.
+receive the most clicks from users. You can use the following probability setting ([0.9, 0.1, 0.1, 0.1, 0.1]) for this.
+Each array element represents an arm and its probability of being clicked.
 We can observe that Ad 0 (index 0 of array) has 90% chance of clicks while others have 10% chances of clicks.
 These information can help us to analyze if the algorithm is performing well.
 
