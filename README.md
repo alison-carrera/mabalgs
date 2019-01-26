@@ -112,7 +112,7 @@ A simulation with the following settings was made:
 ```
 
 The key of the dictionary tells us the time which the probabilities must be activated in the passing time.
-The total time of the simulation was 5000 steps.
+The total time of the simulation was 5000 steps and each point of the chart is an average of 1000 simulations with 5000 steps each.
 
 From this dictionary we can infer that:
 
