@@ -82,12 +82,58 @@ from mab import algs
 thomp_with_two_arms = algs.ThompsomSampling(2)
 my_arm = thomp_with_two_arms.select()
 thomp_with_two_arms.reward(my_arm)
+```
 
+#### Penalty an arm
+
+```python
 # Thompsom Sampling has a penalty function. 
-# It could be used in a onDestroy() event from a banner, for example. 
-# The arm was selected, showed to the user, but no interation was realized until the end of the arm cycle.
+# It should be used in onDestroy() event of a banner, for example. 
+# The arm was selected, showed to the user, but no reward was realized until the end of the arm cycle.
 thomp_with_two_arms.penalty(my_arm)
 ```
+
+## Comparison of the algorithms using Monte Carlo Simulation
+
+Monte Carlo simulation is the best way to debug / test MAB algorithms. This simulation generates data in real time 
+respecting a probability of delivery (chosen by the executor of the simulation) over time. 
+These probabilities may represent the taste of most users regarding a MAB arm (option) over time, for example.
+
+Example: We want to test a 5-arm MAB that will be used in an ad problem, and MAB must choose which of the 5 ads must
+receive the most clicks from users. You can use the following probability setting ([0.9, 0.1, 0.1, 0.1, 0.1]) for this.
+Each array element represents an arm and its probability of being clicked.
+We can observe that Ad 0 (index 0 of array) has 90% chance of clicks while others have 10% chances of clicks.
+These information can help us to analyze if the algorithm is performing well.
+
+A simulation with the following settings was made:
+
+```
+{0: [0.9, 0.6, 0.2, 0.2, 0.1], 1000: [0.3, 0.8, 0.2, 0.2, 0.2], 4000: [0.7, 0.3, 0.2, 0.2, 0.1]}
+```
+
+The key of the dictionary tells us the time which the probabilities must be activated in the passing time.
+The total time of the simulation was 5000 steps and each point of the chart is an average of 1000 simulations with 5000 steps each.
+
+From this dictionary we can infer that:
+
+- From time 0 to 1000, arm 0 is the winner.
+- From time 1000 to 4000, arm 1 is the winner
+- From time 4000, arm 0 is the winner.
+
+### Results:
+
+![UCB1](./readme-images/ucb1.png)
+
+![UCB-Tuned](./readme-images/ucbt.png)
+
+![Thompsom Sampling](./readme-images/ths.png)
+
+![Cumulative Rewards](./readme-images/rewards.png)
+
+Remembering that all these analyzes were performed in a simulation environment and the results may vary according 
+to the type of information the MAB will perform on. For a more sensible choice with real world data, please perform 
+an AB test between the algorithms in your scenario.
+
 ----------------
 
 ## References

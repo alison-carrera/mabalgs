@@ -6,5 +6,9 @@ clean:
 build:
 	python setup.py sdist
 
+setup:
+	pip install -r requirements.txt
+	pip install -r requirements_test.txt
+
 deploy: clean build
 	twine upload dist/*
