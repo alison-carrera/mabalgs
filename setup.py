@@ -6,7 +6,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='mabalgs',
-      version='0.5.1',
+      version='0.5.2',
       description='Multi-armed bandit algorithms',
       url='https://github.com/alison-carrera/mabalgs',
       author='Alison Carrera',
