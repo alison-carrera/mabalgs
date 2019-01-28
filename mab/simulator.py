@@ -1,5 +1,5 @@
 import numpy as np
-from algs import ThompsomSampling, UCB1, UCBTuned
+from mab import algs
 
 
 class BernoulliArm:
@@ -50,11 +50,11 @@ class MonteCarloSimulator:
 
         """
         if name == 'ths':
-            alg = ThompsomSampling(number_of_arms)
+            alg = algs.ThompsomSampling(number_of_arms)
         elif name == 'tuned':
-            alg = UCBTuned(number_of_arms)
+            alg = algs.UCBTuned(number_of_arms)
         elif name == 'ucb1':
-            alg = UCB1(number_of_arms)
+            alg = algs.UCB1(number_of_arms)
         return alg
 
     def run(self, algorithm_name, rewards_proba, number_of_arms, numbers_of_simulations, numbers_of_pull_arms):
