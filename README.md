@@ -120,6 +120,8 @@ From this dictionary we can infer that:
 - From time 1000 to 4000, arm 1 is the winner
 - From time 4000, arm 0 is the winner.
 
+You can check a full example of this simulation at this [notebook.](./Monte_Carlo_Simulation_Example.ipynb)
+
 ### Results:
 
 ![UCB1](./readme-images/ucb1.png)
