@@ -57,7 +57,7 @@ class MonteCarloSimulator:
             alg = algs.UCB1(number_of_arms)
         return alg
 
-    def run(self, algorithm_name, rewards_proba, number_of_arms, numbers_of_simulations, numbers_of_pull_arms):
+    def run(self, algorithm_name, rewards_proba, numbers_of_simulations, numbers_of_pull_arms):
         """
             This is the principal method. It starts the simulation. It can be slow.
 
@@ -74,6 +74,8 @@ class MonteCarloSimulator:
 
         """   
         
+        number_of_arms = len(rewards_proba[0])
+
         arm_probability = np.zeros([numbers_of_pull_arms, number_of_arms])
         cumulative_reward = np.zeros(numbers_of_pull_arms)
         cumulative_total = np.zeros(numbers_of_pull_arms)        
