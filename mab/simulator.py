@@ -37,7 +37,7 @@ class MonteCarloSimulator:
 
             :return: Return a list of bernoulli arms.
         """
-        return list(map(lambda mu: BernoulliArm(rewards_proba), rewards_proba))
+        return list(map(lambda mu: BernoulliArm(mu), rewards_proba))
     
     def get_algorithm(self, name, number_of_arms):
         """
