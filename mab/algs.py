@@ -130,7 +130,7 @@ class ThompsomSampling:
         theta_value = np.random.beta(
             self.number_reward_1 + 1, self.number_reward_0 + 1
             )
-        chosen_arm = np.argsort(ucb_values)[-1]
+        chosen_arm = np.argsort(theta_value)[-1]
         ranked_arms = np.flip(np.argsort(theta_value))
 
         return chosen_arm, ranked_arms
