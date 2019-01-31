@@ -90,7 +90,7 @@ class MonteCarloSimulator:
                 if t in rewards_proba:
                   arms = self.init_arms(rewards_proba[t])
 
-                chosen_arm = alg.select()
+                chosen_arm = alg.select()[0]
                 reward = arms[chosen_arm].draw()
 
                 arm_probability[t, chosen_arm] = arm_probability[t, chosen_arm] + (1 / numbers_of_simulations)

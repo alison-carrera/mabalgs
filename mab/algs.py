@@ -24,6 +24,9 @@ class UCB1(object):
 
             return: Return selected arm number.
                     Arm number returned is (n_arm - 1).
+
+                    Returns a list of arms by importance.
+                    The chosen arm is the index 0 of this list.
         """
 
         arm_dont_usage = np.where(self.number_of_selections == 0)[0]
@@ -40,10 +43,11 @@ class UCB1(object):
             average_reward
             )
         chosen_arm = np.argmax(ucb_values)
+        ranked_arms = np.flip(np.argsort(ucb_values))
 
         self.number_of_selections[chosen_arm] += 1
 
-        return chosen_arm
+        return chosen_arm, ranked_arms
 
     def _factor_importance_each_arm(self, counts, num_selections, avg_reward):
         """
@@ -107,12 +111,17 @@ class ThompsomSampling:
 
             return: Return selected arm number.
                     Arm number returned is (n_arm - 1).
+
+                    Returns a list of arms by importance.
+                    The chosen arm is the index 0 of this list.
         """
         theta_value = np.random.beta(
             self.number_reward_1 + 1, self.number_reward_0 + 1
             )
         chosen_arm = np.argmax(theta_value)
-        return chosen_arm
+        ranked_arms = np.flip(np.argsort(theta_value))
+
+        return chosen_arm, ranked_arms
 
     def reward(self, chosen_arm):
         """

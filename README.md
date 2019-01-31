@@ -22,7 +22,7 @@ from mab import algs
 
 # Constructor receives number of arms.
 ucb_with_two_arms = algs.UCB1(2)
-ucb_with_two_arms.select()
+ucb_with_two_arms.select()[0]
 ```
 
 #### Reward an arm
@@ -31,7 +31,7 @@ from mab import algs
 
 # Constructor receives number of arms.
 ucb_with_two_arms = algs.UCB1(2)
-my_arm = ucb_with_two_arms.select()
+my_arm = ucb_with_two_arms.select()[0]
 ucb_with_two_arms.reward(my_arm)
 ```
 
@@ -45,7 +45,7 @@ from mab import algs
 
 # Constructor receives number of arms.
 ucbt_with_two_arms = algs.UCBTuned(2)
-ucbt_with_two_arms.select()
+ucbt_with_two_arms.select()[0]
 ```
 
 #### Reward an arm
@@ -54,7 +54,7 @@ from mab import algs
 
 # Constructor receives number of arms.
 ucbt_with_two_arms = algs.UCBTuned(2)
-my_arm = ucbt_with_two_arms.select()
+my_arm = ucbt_with_two_arms.select()[0]
 ucbt_with_two_arms.reward(my_arm)
 ```
 
@@ -71,7 +71,7 @@ from mab import algs
 
 # Constructor receives number of arms.
 thomp_with_two_arms = algs.ThompsomSampling(2)
-thomp_with_two_arms.select()
+thomp_with_two_arms.select()[0]
 ```
 
 #### Reward an arm
@@ -80,7 +80,7 @@ from mab import algs
 
 # Constructor receives number of arms.
 thomp_with_two_arms = algs.ThompsomSampling(2)
-my_arm = thomp_with_two_arms.select()
+my_arm = thomp_with_two_arms.select()[0]
 thomp_with_two_arms.reward(my_arm)
 ```
 
