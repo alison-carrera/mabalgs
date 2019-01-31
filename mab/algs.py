@@ -32,7 +32,18 @@ class UCB1(object):
         arm_dont_usage = np.where(self.number_of_selections == 0)[0]
         if len(arm_dont_usage) > 0:
             self.number_of_selections[arm_dont_usage[0]] += 1
-            return arm_dont_usage[0]
+
+            ranked_arms = list(range(len(self.number_of_selections)))
+
+            if arm_dont_usage[0] != 0:
+                ranked_arms = np.roll(ranked_arms, 1)
+                first_element = ranked_arms[0]
+                index_current = ranked_arms.tolist().index(arm_dont_usage[0])
+
+                ranked_arms[0] = arm_dont_usage[0]
+                ranked_arms[index_current] = first_element
+
+            return arm_dont_usage[0], ranked_arms
 
         average_reward = self.rewards / self.number_of_selections
         total_counts = np.sum(self.number_of_selections)
@@ -42,7 +53,8 @@ class UCB1(object):
             self.number_of_selections,
             average_reward
             )
-        chosen_arm = np.argmax(ucb_values)
+ 
+        chosen_arm = np.argsort(ucb_values)[-1]
         ranked_arms = np.flip(np.argsort(ucb_values))
 
         self.number_of_selections[chosen_arm] += 1
@@ -111,14 +123,14 @@ class ThompsomSampling:
 
             return: Return selected arm number.
                     Arm number returned is (n_arm - 1).
-
+                    
                     Returns a list of arms by importance.
                     The chosen arm is the index 0 of this list.
         """
         theta_value = np.random.beta(
             self.number_reward_1 + 1, self.number_reward_0 + 1
             )
-        chosen_arm = np.argmax(theta_value)
+        chosen_arm = np.argsort(ucb_values)[-1]
         ranked_arms = np.flip(np.argsort(theta_value))
 
         return chosen_arm, ranked_arms
