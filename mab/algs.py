@@ -130,7 +130,6 @@ class ThompsomSampling:
             self.number_reward_1 + 1, self.number_reward_0 + 1
             )
         
-        print(theta_value)
         ranked_arms = np.flip(np.argsort(theta_value), axis=0)
         chosen_arm = ranked_arms[0]
 
