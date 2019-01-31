@@ -53,9 +53,8 @@ class UCB1(object):
             self.number_of_selections,
             average_reward
             )
- 
-        chosen_arm = np.argsort(ucb_values)[-1]
-        ranked_arms = np.flip(np.argsort(ucb_values))
+        ranked_arms = np.flip(np.argsort(ucb_values), axis=0)
+        chosen_arm = ranked_arms[0]
 
         self.number_of_selections[chosen_arm] += 1
 
@@ -130,8 +129,10 @@ class ThompsomSampling:
         theta_value = np.random.beta(
             self.number_reward_1 + 1, self.number_reward_0 + 1
             )
-        chosen_arm = np.argsort(theta_value)[-1]
-        ranked_arms = np.flip(np.argsort(theta_value))
+        
+        print(theta_value)
+        ranked_arms = np.flip(np.argsort(theta_value), axis=0)
+        chosen_arm = ranked_arms[0]
 
         return chosen_arm, ranked_arms
 
