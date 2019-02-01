@@ -13,7 +13,7 @@ class UCB1(object):
         """
             UCB1 constructor.
 
-            n_arms: Number of arms which this instance need to perform.
+            :param n_arms: Number of arms which this instance need to perform.
         """
         self.number_of_selections = np.zeros(n_arms).astype(np.float)
         self.rewards = np.zeros(n_arms).astype(np.float)
@@ -22,7 +22,7 @@ class UCB1(object):
         """
             This method selects the best arm chosen by UCB1.
 
-            return: Return selected arm number.
+            :return: Return selected arm number.
                     Arm number returned is (n_arm - 1).
 
                     Returns a list of arms by importance.
@@ -52,7 +52,7 @@ class UCB1(object):
             total_counts,
             self.number_of_selections,
             average_reward
-            )
+        )
         ranked_arms = np.flip(np.argsort(ucb_values), axis=0)
         chosen_arm = ranked_arms[0]
 
@@ -64,7 +64,7 @@ class UCB1(object):
         """
             This method represents the core of the UCB1 algorithm.
 
-            return: An array with the importance of all arms.
+            :return: An array with the importance of all arms.
         """
 
         exploration_factor = np.sqrt(2 * np.log(counts) / num_selections)
@@ -74,7 +74,7 @@ class UCB1(object):
         """
             This method gives a reward for a given arm.
 
-            chosen_arm: Value returned from select().
+            :param chosen_arm: Value returned from select().
         """
         self.rewards[chosen_arm] += 1
 
@@ -84,7 +84,7 @@ class UCBTuned(UCB1):
         """
             UCB1 constructor.
 
-            n_arms: Number of arms which this instance need to perform.
+            :param n_arms: Number of arms which this instance need to perform.
         """
         super().__init__(n_arms)
 
@@ -92,7 +92,7 @@ class UCBTuned(UCB1):
         """
             This method represents the core of the UCB-Tuned algorithm.
 
-            return: An array with the importance of all arms.
+            :return: An array with the importance of all arms.
         """
         variance = (np.sum(np.square(self.rewards - avg_reward)))
         variance_factor = (1/num_selections) * variance
@@ -111,7 +111,7 @@ class ThompsomSampling:
         """
             Thompsom Sampling constructor.
 
-            n_arms: Number of arms which this instance need to perform.
+            :param n_arms: Number of arms which this instance need to perform.
         """
         self.number_reward_0 = np.zeros(n_arms).astype(np.float)
         self.number_reward_1 = np.zeros(n_arms).astype(np.float)
@@ -120,16 +120,16 @@ class ThompsomSampling:
         """
             This method selects the best arm chosen by Thompsom Sampling.
 
-            return: Return selected arm number.
+            :return: Return selected arm number.
                     Arm number returned is (n_arm - 1).
-                    
+
                     Returns a list of arms by importance.
                     The chosen arm is the index 0 of this list.
         """
         theta_value = np.random.beta(
             self.number_reward_1 + 1, self.number_reward_0 + 1
-            )
-        
+        )
+
         ranked_arms = np.flip(np.argsort(theta_value), axis=0)
         chosen_arm = ranked_arms[0]
 
@@ -139,7 +139,7 @@ class ThompsomSampling:
         """
             This method gives a reward for a given arm.
 
-            chosen_arm: Value returned from select().
+            :param chosen_arm: Value returned from select().
         """
         self.number_reward_1[chosen_arm] += 1
 
@@ -151,6 +151,6 @@ class ThompsomSampling:
             The arm was selected, showed to the user, but no interation
             was realized until the end of the arm cycle.
 
-            chosen_arm: Value returned from select().
+            :param chosen_arm: Value returned from select().
         """
         self.number_reward_0[chosen_arm] += 1
