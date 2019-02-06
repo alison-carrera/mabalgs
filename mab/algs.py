@@ -94,8 +94,7 @@ class UCBTuned(UCB1):
 
             :return: An array with the importance of all arms.
         """
-        variance = (np.sum(np.square(self.rewards - avg_reward)))
-        variance_factor = (1/num_selections) * variance
+        variance_factor = avg_reward - np.square(avg_reward)
 
         tuned = np.sqrt(2 * np.log(counts) / num_selections)
         tuned_factor = variance_factor + tuned
