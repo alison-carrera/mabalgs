@@ -207,7 +207,9 @@ A simulation with the following settings was made:
            [0.1, 0.9, 0.1, 0.1, 0.1], 
            [0.1, 0.1, 0.9, 0.1, 0.1], 
            [0.1, 0.1, 0.1, 0.9, 0.1], 
-           [0.25, 0.25, 0.25, 0.25]]} # Rank position click probability.
+           [0.25, 0.25, 0.25, 0.25]] # Rank position click probability.
+           
+} 
 ```
 
 In this simulation we have something different. Now, at a given time we need to set the probability of all available arms in each position of the rank, and
@@ -225,7 +227,7 @@ You can check a full example of this simulation at this [notebook.](./Monte_Carl
 
 # RBA vs RBA-M
 
-If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb). It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
+If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb) It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
 
 ### Results:
 
