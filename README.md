@@ -225,10 +225,6 @@ From this dictionary we can infer that:
 
 You can check a full example of this simulation at this [notebook.](./Monte_Carlo_RBAM.ipynb)
 
-# RBA vs RBA-M
-
-If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb) It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
-
 ### Results:
 
 ![UCB1](./readme-images/ranked/ucb1_ranked.png)
@@ -242,6 +238,10 @@ If you want to see the behavior of the RBA algorithm, you can execute it using t
 Remembering that all these analyzes were performed in a simulation environment and the results may vary according 
 to the type of information the RMAB will perform on. For a more sensible choice with real world data, please perform 
 an AB test between the algorithms in your scenario.
+
+# RBA vs RBA-M
+
+If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb) It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
 
 ----------------
 
