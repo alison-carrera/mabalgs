@@ -138,9 +138,115 @@ an AB test between the algorithms in your scenario.
 
 ----------------
 
+# Ranked Multi-Armed Bandit Algorithms
+
+### RBA (Ranked Bandit Algorithm)
+This is an online learning algorithm which can be used to the ranking problem. In this algorithm we have a certain quantity of
+arms to be shown in a certain quantity of a ranked slots (like a netflix film list). Each arm is best in some of the ranking position and
+this algorithm uses MAB instances to do that.
+
+#### Get selected arms in its ranked position
+```python
+from mab import algs, ranked_algs
+
+# Constructor receives number of arms, number of ranks and a MAB algorithm reference.
+rba_algorithm = ranked_algs.RBA(10, 10, algs.ThompsomSampling) # Any MAB from algs can be used.
+ranked_selected_arms = rba_algorithm.select() # Best arms in its best position.
+```
+
+#### Reward an arm in a certain position of the rank
+```python
+from mab import algs, ranked_algs
+
+# Constructor receives number of arms, number of ranks and a MAB algorithm reference.
+rba_algorithm = ranked_algs.RBA(10, 10, algs.ThompsomSampling) # Any MAB from algs can be used.
+ranked_selected_arms = rba_algorithm.select() # Best arms in its best position.
+rba_algorithm.reward(ranked_selected_arms, 2) # Reward the arm 2 in its position of the rank.
+```
+
+### RBA-M (Ranked Bandit Algorithm - Modified)
+It's the same thing of the RBA, but with a modification in the arm collisions approach. For more details see code documentation.
+
+#### Get selected arms in its ranked position
+```python
+from mab import algs, ranked_algs
+
+# Constructor receives number of arms, number of ranks and a MAB algorithm reference.
+rbam_algorithm = ranked_algs.RBAM(10, 10, algs.ThompsomSampling) # Any MAB from algs can be used.
+ranked_selected_arms = rbam_algorithm.select() # Best arms in its best position.
+```
+
+#### Reward an arm in a certain position of the rank
+```python
+from mab import algs, ranked_algs
+
+# Constructor receives number of arms, number of ranks and a MAB algorithm reference.
+rbam_algorithm = ranked_algs.RBAM(10, 10, algs.ThompsomSampling) # Any MAB from algs can be used.
+ranked_selected_arms = rbam_algorithm.select()  # Best arms in its best position.
+rbam_algorithm.reward(ranked_selected_arms, 2) # Reward the arm 2 in its position of the rank.
+```
+
+## Behavior of the RBA-M algorithm using Monte Carlo Simulation
+
+Like before, we will make a Monte Carlo experimentation using RBA-M Algorithm to show its behavior.
+
+Example: We want to test a 5-arm and 4-rank MAB that will be used in a movie slot recomendation problem, 
+and MAB must choose which of the 4 movies banners must receive the most clicks from users in each slot position.
+
+A simulation with the following settings was made:
+
+```
+{
+    0: [[0.1, 0.1, 0.1, 0.9, 0.1],
+        [0.1, 0.1, 0.9, 0.1, 0.1], 
+        [0.1, 0.9, 0.1, 0.1, 0.1], 
+        [0.9, 0.1, 0.1, 0.1, 0.1], 
+        [0.25, 0.25, 0.25, 0.25]], # Rank position click probability.
+                        
+    1500: [[0.9, 0.1, 0.1, 0.1, 0.1], 
+           [0.1, 0.9, 0.1, 0.1, 0.1], 
+           [0.1, 0.1, 0.9, 0.1, 0.1], 
+           [0.1, 0.1, 0.1, 0.9, 0.1], 
+           [0.25, 0.25, 0.25, 0.25]]} # Rank position click probability.
+```
+
+In this simulation we have something different. Now, at a given time we need to set the probability of all available arms in each position of the rank, and
+the last array is the rank position click probabilitie or velocity of convergence at given ranking position.
+
+The total time of the simulation was 3000 steps and each point of the chart is an average of 1000 simulations with 3000 steps each.
+
+From this dictionary we can infer that:
+
+- From time 0 to 1500, arm 3 is the winner at rank 0, arm 2 is the winner at rank 1, arm 1 is the winner at rank 2 and arm 0 is the winner at rank 3.
+- From time 1500 to 3000, arm 0 is the winner at rank 0, arm 1 is the winner at rank 1, arm 2 is the winner at rank 2 and arm 3 is the winner at rank 3.
+- The Rank position click probability is the same to all to give a better understanding of their behaviors.
+
+You can check a full example of this simulation at this [notebook.](./Monte_Carlo_RBAM.ipynb)
+
+# RBA vs RBA-M
+
+If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb). It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
+
+### Results:
+
+![UCB1](./readme-images/ranked/ucb1_ranked.png)
+
+![UCB-Tuned](./readme-images/ranked/ucbt_ranked.png)
+
+![Thompsom Sampling](./readme-images/ranked/ths_ranked.png)
+
+![Cumulative Rewards](./readme-images/ranked/rewards_ranked.png)
+
+Remembering that all these analyzes were performed in a simulation environment and the results may vary according 
+to the type of information the RMAB will perform on. For a more sensible choice with real world data, please perform 
+an AB test between the algorithms in your scenario.
+
+----------------
+
 ## References
 - [Wikipedia MAB](https://en.wikipedia.org/wiki/Multi-armed_bandit)
 - [A Survey of Online Experiment Design
 with the Stochastic Multi-Armed Bandit](https://arxiv.org/pdf/1510.00757.pdf)
 - [Finite-time Analysis of the Multiarmed Bandit Problem](https://link.springer.com/article/10.1023%2FA%3A1013689704352?LI=true)
 - [Solving multiarmed bandits: A comparison of epsilon-greedy and Thompson sampling](https://towardsdatascience.com/solving-multiarmed-bandits-a-comparison-of-epsilon-greedy-and-thompson-sampling-d97167ca9a50)
+- [Learning Diverse Rankings with Multi-Armed Bandits](https://dl.acm.org/citation.cfm?id=1390255)
