@@ -239,7 +239,7 @@ Remembering that all these analyzes were performed in a simulation environment a
 to the type of information the RMAB will perform on. For a more sensible choice with real world data, please perform 
 an AB test between the algorithms in your scenario.
 
-# RBA vs RBA-M
+### RBA vs RBA-M
 
 If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb) It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
 
