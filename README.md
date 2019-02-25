@@ -145,7 +145,7 @@ This is an online learning algorithm which can be used to the ranking problem. I
 arms to be shown in a certain quantity of a ranked slots (like a netflix film list). Each arm is best in some of the ranking position and
 this algorithm uses MAB instances to do that.
 
-#### Get selected arms in its ranked position
+#### Get selected arms in their ranked positions
 ```python
 from mab import algs, ranked_algs
 
@@ -167,7 +167,7 @@ rba_algorithm.reward(ranked_selected_arms, 2) # Reward the arm 2 in its position
 ### RBA-M (Ranked Bandit Algorithm - Modified)
 It's the same thing of the RBA, but with a modification in the arm collisions approach. For more details see code documentation.
 
-#### Get selected arms in its ranked position
+#### Get selected arms in their ranked positions
 ```python
 from mab import algs, ranked_algs
 
@@ -213,7 +213,7 @@ A simulation with the following settings was made:
 ```
 
 In this simulation we have something different. Now, at a given time we need to set the probability of all available arms in each position of the rank, and
-the last array is the rank position click probabilitie or velocity of convergence at given ranking position.
+the last array is the rank position click probability (velocity of convergence at given ranking position).
 
 The total time of the simulation was 3000 steps and each point of the chart is an average of 1000 simulations with 3000 steps each.
 
@@ -241,7 +241,7 @@ an AB test between the algorithms in your scenario.
 
 ### RBA vs RBA-M
 
-If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb) It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in different positions is that RBA-M performs better.
+If you want to see the behavior of the RBA algorithm, you can execute it using this [notebook.](./Monte_Carlo_RBAM.ipynb) It's just change the 'rbam' to 'rba' in the run method. The behavior between they is the same, just in the 'same weight' case for arms in same positions is that RBA-M performs better.
 
 ----------------
 
