@@ -165,7 +165,8 @@ rba_algorithm.reward(ranked_selected_arms, 2) # Reward the arm 2 in its position
 ```
 
 ### RBA-M (Ranked Bandit Algorithm - Modified)
-It's the same thing of the RBA, but with a modification in the arm collisions approach. For more details see code documentation.
+It's the same thing of the RBA, but with a modification in the arm collisions approach.
+This new collision approach was made by me and my team partner [Fábio](https://github.com/fabiosvb). For more details about this approach, please see code documentation.
 
 #### Get selected arms in their ranked positions
 ```python
