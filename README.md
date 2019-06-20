@@ -13,6 +13,9 @@ pip install mabalgs
 
 ## Algorithms (Bandit strategies)
 
+### Non-linear Contextual Bandit Algorithm (ONN_THS)
+If you are looking for a contextual bandit algorithm, please go to my another repository [ONN_THS](https://github.com/alison-carrera/onn)
+
 ### UCB1 (Upper Confidence Bound)
 Is an algorithm for the multi-armed bandit that achieves regret that grows only logarithmically with the number of actions taken, with no prior knowledge of the reward distribution required.
 
