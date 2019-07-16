@@ -252,6 +252,7 @@ If you want to see the behavior of the RBA algorithm, you can execute it using t
 ## Contributors
 - [Alison de Andrade Carrera](https://github.com/alison-carrera)
 - [Fábio Silva Vilas Boas](https://github.com/fabiosvb)
+- [Daniel Araújo](https://github.com/danielcoaraujo)
 
 ## References
 - [Wikipedia MAB](https://en.wikipedia.org/wiki/Multi-armed_bandit)
