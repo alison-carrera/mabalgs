@@ -112,8 +112,8 @@ class ThompsomSampling:
 
             :param n_arms: Number of arms which this instance need to perform.
         """
-        self.number_reward_0 = np.zeros(n_arms).astype(np.float)
-        self.number_reward_1 = np.zeros(n_arms).astype(np.float)
+        self.n_impressions = np.ones(n_arms).astype(np.float)
+        self.n_rewards = np.ones(n_arms).astype(np.float)
 
     def select(self):
         """
@@ -125,12 +125,12 @@ class ThompsomSampling:
                     Returns a list of arms by importance.
                     The chosen arm is the index 0 of this list.
         """
-        theta_value = np.random.beta(
-            self.number_reward_1 + 1, self.number_reward_0 + 1
-        )
-
+        rewards_0 = self.n_impressions - self.n_rewards
+        rewards_0[rewards_0 <= 0] = 1
+        theta_value = np.random.beta(self.n_rewards, rewards_0)
         ranked_arms = np.flip(np.argsort(theta_value), axis=0)
         chosen_arm = ranked_arms[0]
+        self.n_impressions[chosen_arm] += 1
 
         return chosen_arm, ranked_arms
 
@@ -140,16 +140,4 @@ class ThompsomSampling:
 
             :param chosen_arm: Value returned from select().
         """
-        self.number_reward_1[chosen_arm] += 1
-
-    def penalty(self, chosen_arm):
-        """
-            This method gives a penalty for a given arm.
-            It should be used in a onDestroy() event from a banner,
-            for example.
-            The arm was selected, showed to the user, but no interation
-            was realized until the end of the arm cycle.
-
-            :param chosen_arm: Value returned from select().
-        """
-        self.number_reward_0[chosen_arm] += 1
+        self.n_rewards[chosen_arm] += 1

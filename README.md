@@ -87,15 +87,6 @@ my_arm = thomp_with_two_arms.select()[0]
 thomp_with_two_arms.reward(my_arm)
 ```
 
-#### Penalty an arm
-
-```python
-# Thompsom Sampling has a penalty function. 
-# It should be used in onDestroy() event of a banner, for example. 
-# The arm was selected, showed to the user, but no reward was realized until the end of the arm cycle.
-thomp_with_two_arms.penalty(my_arm)
-```
-
 ## Comparison of the algorithms using Monte Carlo Simulation
 
 Monte Carlo simulation is the best way to debug / test MAB algorithms. This simulation generates data in real time 

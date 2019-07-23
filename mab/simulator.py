@@ -104,9 +104,6 @@ class MonteCarloSimulator:
                 cumulative_total[t] = cumulative_total[t] + \
                     cumulative_reward[t]
 
-                if algorithm_name == 'ths' and reward == 0:
-                    alg.penalty(chosen_arm)
-
                 if reward == 1:
                     alg.reward(chosen_arm)
 

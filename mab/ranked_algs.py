@@ -78,8 +78,6 @@ class RBA:
             rank_index = selected_arms.index(arm)
             if arm == chosen_arm:
                 self.ranks[rank_index].reward(arm)
-            elif hasattr(self.mab_alg_type, 'penalty'):
-                self.ranks[rank_index].penalty(arm)
 
 
 class RBAM(RBA):
