@@ -170,7 +170,7 @@ class RankedMonteCarloSimulator:
 
         rewards = np.asarray(rewards)
         velocity_factor = np.asarray(velocity_factor)
-        final_rewards = np.logical_and(rewards, velocity_factor).astype(np.int)
+        final_rewards = np.logical_and(rewards, velocity_factor).astype(int)
 
         if final_rewards.sum() > 1:
             non_zero_index = np.flatnonzero(final_rewards)

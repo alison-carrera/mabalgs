@@ -15,8 +15,8 @@ class UCB1(object):
 
             :param n_arms: Number of arms which this instance need to perform.
         """
-        self.number_of_selections = np.zeros(n_arms).astype(np.float)
-        self.rewards = np.zeros(n_arms).astype(np.float)
+        self.number_of_selections = np.zeros(n_arms).astype(float)
+        self.rewards = np.zeros(n_arms).astype(float)
 
     def select(self):
         """
@@ -112,8 +112,8 @@ class ThompsomSampling:
 
             :param n_arms: Number of arms which this instance need to perform.
         """
-        self.n_impressions = np.ones(n_arms).astype(np.float)
-        self.n_rewards = np.ones(n_arms).astype(np.float)
+        self.n_impressions = np.ones(n_arms).astype(float)
+        self.n_rewards = np.ones(n_arms).astype(float)
 
     def select(self):
         """
