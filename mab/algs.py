@@ -15,8 +15,8 @@ class UCB1(object):
 
             :param n_arms: Number of arms which this instance need to perform.
         """
-        self.number_of_selections = np.zeros(n_arms).astype(float)
-        self.rewards = np.zeros(n_arms).astype(float)
+        self.n_impressions = np.zeros(n_arms).astype(float)
+        self.n_rewards = np.zeros(n_arms).astype(float)
 
     def select(self):
         """
@@ -29,11 +29,11 @@ class UCB1(object):
                     The chosen arm is the index 0 of this list.
         """
 
-        arm_dont_usage = np.where(self.number_of_selections == 0)[0]
+        arm_dont_usage = np.where(self.n_impressions == 0)[0]
         if len(arm_dont_usage) > 0:
-            self.number_of_selections[arm_dont_usage[0]] += 1
+            self.n_impressions[arm_dont_usage[0]] += 1
 
-            ranked_arms = list(range(len(self.number_of_selections)))
+            ranked_arms = list(range(len(self.n_impressions)))
 
             if arm_dont_usage[0] != 0:
                 ranked_arms = np.roll(ranked_arms, 1)
@@ -45,18 +45,18 @@ class UCB1(object):
 
             return arm_dont_usage[0], ranked_arms
 
-        average_reward = self.rewards / self.number_of_selections
-        total_counts = np.sum(self.number_of_selections)
+        average_reward = self.n_rewards / self.n_impressions
+        total_counts = np.sum(self.n_impressions)
 
         ucb_values = self._factor_importance_each_arm(
             total_counts,
-            self.number_of_selections,
+            self.n_impressions,
             average_reward
         )
         ranked_arms = np.flip(np.argsort(ucb_values), axis=0)
         chosen_arm = ranked_arms[0]
 
-        self.number_of_selections[chosen_arm] += 1
+        self.n_impressions[chosen_arm] += 1
 
         return chosen_arm, ranked_arms
 
@@ -76,7 +76,7 @@ class UCB1(object):
 
             :param chosen_arm: Value returned from select().
         """
-        self.rewards[chosen_arm] += 1
+        self.n_rewards[chosen_arm] += 1
 
 
 class UCBTuned(UCB1):
@@ -99,7 +99,7 @@ class UCBTuned(UCB1):
         tuned = np.sqrt(2 * np.log(counts) / num_selections)
         tuned_factor = variance_factor + tuned
 
-        explo = np.minimum(1/4, tuned_factor)
+        explo = np.minimum(1 / 4, tuned_factor)
         exploration_factor = np.sqrt((np.log(counts) / num_selections) * explo)
 
         return avg_reward + exploration_factor
