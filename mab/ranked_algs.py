@@ -13,7 +13,6 @@ import random
 
 
 class RBA:
-
     """
 
         This class represents a ranked mab algorithm implementation by paper [1]
@@ -62,8 +61,10 @@ class RBA:
             selected_arm, ranked_arms = self.ranks[i].select()
 
             if selected_arm in selected_arms:
-                selected_arms.append(self.resolve_conflict(
-                    selected_arms, ranked_arms))
+                self.ranks[i].n_impressions[selected_arm] -= 1
+                non_conflicted_arm = self.resolve_conflict(selected_arms, ranked_arms)
+                self.ranks[i].n_impressions[non_conflicted_arm] += 1
+                selected_arms.append(non_conflicted_arm)
             else:
                 selected_arms.append(selected_arm)
 
@@ -81,7 +82,6 @@ class RBA:
 
 
 class RBAM(RBA):
-
     """
 
         This class represents a modified ranked mab algorithm from [1].
